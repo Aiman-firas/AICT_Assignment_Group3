@@ -1,38 +1,26 @@
-# main.py
+from data.city_map import city_map
+from algorithms.bfs import bfs_shortest_path
+from algorithms.dfs import dfs_shortest_path
+from algorithms.gbfs import gbfs_shortest_path
+from algorithms.astar import astar_shortest_path
 
-from collections import deque
-
-# Step 1: Represent the graph (city map)
-city_map = {
-    'A': {'B': 3, 'C': 5},
-    'B': {'A': 3, 'D': 2, 'E': 7},
-    'C': {'A': 5, 'D': 4},
-    'D': {'B': 2, 'C': 4, 'E': 6},
-    'E': {'B': 7, 'D': 6}
+heuristic = {
+    'A': 10, 'B': 8, 'C': 7, 'D': 5, 'E': 6,
+    'F': 4, 'G': 2, 'H': 3, 'I': 4, 'J': 0
 }
 
-# Step 2: BFS Algorithm
-def bfs_shortest_path(graph, start, goal):
-    # Queue to store (current_node, path_to_node)
-    queue = deque([(start, [start])])
-    visited = set()
-    
-    while queue:
-        current_node, path = queue.popleft()
-        
-        if current_node == goal:
-            return path  # Found the shortest path
-        
-        if current_node not in visited:
-            visited.add(current_node)
-            for neighbor in graph[current_node]:
-                if neighbor not in visited:
-                    queue.append((neighbor, path + [neighbor]))
-    return None  # No path found
+def choose_algorithm(algorithm, graph, start, goal):
+    if algorithm == "BFS":
+        return bfs_shortest_path(graph, start, goal)
+    elif algorithm == "DFS":
+        return dfs_shortest_path(graph, start, goal)
+    elif algorithm == "GBFS":
+        return gbfs_shortest_path(graph, start, goal, heuristic)
+    elif algorithm == "A*":
+        return astar_shortest_path(graph, start, goal, heuristic)
+    else:
+        raise ValueError("Invalid algorithm selected.")
 
-# Step 3: Test BFS
 if __name__ == "__main__":
-    start = 'A'
-    goal = 'E'
-    path = bfs_shortest_path(city_map, start, goal)
-    print(f"Shortest path from {start} to {goal}: {path}")
+    from ui import run_ui
+    run_ui(city_map, choose_algorithm)
