@@ -1,26 +1,24 @@
 from data.city_map import city_map
-from algorithms.bfs import bfs_shortest_path
-from algorithms.dfs import dfs_shortest_path
-from algorithms.gbfs import gbfs_shortest_path
-from algorithms.astar import astar_shortest_path
+from ui import run_ui
 
-heuristic = {
-    'A': 10, 'B': 8, 'C': 7, 'D': 5, 'E': 6,
-    'F': 4, 'G': 2, 'H': 3, 'I': 4, 'J': 0
-}
-
-def choose_algorithm(algorithm, graph, start, goal):
-    if algorithm == "BFS":
-        return bfs_shortest_path(graph, start, goal)
-    elif algorithm == "DFS":
-        return dfs_shortest_path(graph, start, goal)
-    elif algorithm == "GBFS":
-        return gbfs_shortest_path(graph, start, goal, heuristic)
-    elif algorithm == "A*":
-        return astar_shortest_path(graph, start, goal, heuristic)
-    else:
-        raise ValueError("Invalid algorithm selected.")
-
+# Main program loop
 if __name__ == "__main__":
-    from ui import run_ui
-    run_ui(city_map, choose_algorithm)
+    while True:
+        print("\nSelect an option:")
+        print("1. Run User Interface (choose start/end nodes and algorithm)")
+        print("2. Exit")
+
+        choice = input("Enter your choice (1 or 2): ").strip()
+
+        if choice == "1":
+            run_ui(city_map, lambda algo, graph, start, goal: {
+                "BFS": bfs_shortest_path(graph, start, goal),
+                "DFS": dfs_shortest_path(graph, start, goal),
+                "GBFS": gbfs_shortest_path(graph, start, goal, heuristic),
+                "A*": astar_shortest_path(graph, start, goal, heuristic)
+            }[algo])
+        elif choice == "2":
+            print("Exiting. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please enter 1 or 2.")
