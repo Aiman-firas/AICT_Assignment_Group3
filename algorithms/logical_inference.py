@@ -76,7 +76,7 @@ def example_speeding():
     kb = TrafficKB()
 
     # Store actual speed
-    kb.add_sensor_data("speed", 55)  # Speed = 75 km/h
+    kb.add_sensor_data("speed", 55)  # Speed = 55 km/h
 
     # Define rule: If speed > 60 km/h → "speed_over_limit"
     if kb.sensor_data["speed"] > 60:
@@ -154,8 +154,8 @@ def example_drink_driving():
     kb = TrafficKB()
 
     # Store alcohol levels
-    kb.add_sensor_data("bac_blood", 70)  # Blood Alcohol = 90 mg/100ml
-    kb.add_sensor_data("bac_breath", 30)  # Breath Alcohol = 40 µg/100ml
+    kb.add_sensor_data("bac_blood", 70)  # Blood Alcohol = 70 mg/100ml
+    kb.add_sensor_data("bac_breath", 30)  # Breath Alcohol = 30 µg/100ml
 
     # Singapore Limits: 80 mg/100ml (blood), 35 µg/100ml (breath)
     if kb.sensor_data["bac_blood"] > 80:
