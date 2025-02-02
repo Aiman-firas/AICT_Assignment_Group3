@@ -1,0 +1,24 @@
+INSTRUCTIONS for .ipynb (Google Colab)
+
+Step 1. Install Pomegranate version 0.13.3 directly from source
+    Command: !pip install pomegranate==0.13.3
+
+Step 2. Import Node, DiscreteDistribution, ConditionalProbabilityTable, BayesianNetwork from pomegranate
+Step 3. You are now ready to run the models
+
+INSTRUCTIONS for local python environment
+Create a Virtual Environment (Optional but Recommended)
+Step 1: Open your terminal or command prompt.
+Step 2: Navigate to your project directory: cd path/to/your/project
+Step 3: Create a virtual environment: python -m venv env
+Step 4: Activate the virtual environment:env\Scripts\activate
+Step 5: pip install pomegranate==0.13.3
+Step 6: pip install numpy scipy
+Step 7: from pomegranate import Node, DiscreteDistribution, ConditionalProbabilityTable, BayesianNetwork
+Step 8: Now, you can write and execute your Python script that contains the Bayesian Network.
+Step 9: python your_script.py
+
+
+
+
+
